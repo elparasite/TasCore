@@ -31,7 +31,7 @@ namespace TasGenerator.Helper
 
             var firstTeam = groupsFull[groupToSwift].Teams.First();
             groupsFull[groupToSwift].Teams.RemoveAt(0);
-            groupsFull[groupToSwift].Teams.Add(firstTeam);
+            groupsFull[groupToSwift].Teams.Add(firstTeam); 
         }
 
         public void CompleteSolution(List<DrawGroup> groupsWithoutDrawItem, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int groupIndex, int nbItemBySolution = 0)
