@@ -29,12 +29,10 @@ namespace TasGenerator.Helper
 
             }
 
-            var firstTeam = groupsFull[groupToSwift].Teams.First();
-            groupsFull[groupToSwift].Teams.RemoveAt(0);
-            groupsFull[groupToSwift].Teams.Add(firstTeam);  
+       
         }
 
-        public void CompleteSolution(List<DrawGroup> groupsWithoutDrawItem, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int groupIndex, int nbItemBySolution = 0)
+        public void CompleteSolution(List<DrawGroup> groupsWithoutDrawItem, List<DrawSolution> solutions,DrawSolution currentSolution, int nbTeamsByItem, int nbItemBySolution )
         {
             if (currentSolution == null)
                 currentSolution = new DrawSolution();
@@ -49,34 +47,19 @@ namespace TasGenerator.Helper
 
             if (currentSolution.DrawItems.Count < nbItemBySolution)
             {
-                var team = TakeTeamInGroup(groupsWithoutDrawItem, groupIndex);
-                CompleteDrawItem(groupsWithoutDrawItem, currentSolution, currentItem, nbTeamsByItem, groupIndex + 1);
+                CompleteDrawItem(groupsWithoutDrawItem, currentSolution, null, nbTeamsByItem, 0);
+                CompleteSolution(groupsWithoutDrawItem, solutions,currentSolution, nbTeamsByItem, nbItemBySolution);
             }
             else
-                currentSolution.AddItem(currentItem);
+                solutions.Add(currentSolution);
+
         }
 
 
-        public void CompleteDrawItem(List<DrawGroup> groupsWithoutDrawItem, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int groupIndex, int teamIndex = 0)
+        public void CompleteDrawItem(List<DrawGroup> groupsWithoutDrawItem, int nbDrawGroup, int nbTeamByItem, int currentGroupIndex, int curentTeamsIndex )
         {
-            if (currentItem == null)
-                currentItem = new DrawItem();
+           
 
-            //int i = 0;
-            //while (currentItem.Teams.Count < nbTeamsByItem)
-            //{
-            //    var team = TakeTeamInGroup(groupsWithoutDrawItem, i);
-            //    i++;
-            //    currentItem.Teams.Add(team);
-            //}
-
-            if (currentItem.Teams.Count < nbTeamsByItem)
-            {
-                var team = TakeTeamInGroup(groupsWithoutDrawItem, groupIndex);
-                CompleteDrawItem(groupsWithoutDrawItem, currentSolution,currentItem, nbTeamsByItem, groupIndex + 1);
-            }
-            else
-                currentSolution.AddItem(currentItem);
         }
 
         public Team TakeTeamInGroup(List<DrawGroup> groupsWithoutDrawItem, int groupIndex)
