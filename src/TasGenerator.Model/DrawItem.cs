@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TasGenerator.Model
 {
- public   class DrawItem : IComparable
+    public class DrawItem : IComparable
     {
         public List<Team> Teams { get; set; } = new List<Team>();
         public int NumberTeamsByItems { get; set; }
@@ -23,7 +23,12 @@ namespace TasGenerator.Model
         public DrawItem()
         {
         }
-  
+        public DrawItem(DrawItem item)
+        {
+            NumberTeamsByItems = item.NumberTeamsByItems;
+            Teams = new List<Team>(item.Teams);
+        }
+
 
         public override bool Equals(object obj)
         {
@@ -39,7 +44,7 @@ namespace TasGenerator.Model
 
         public override string ToString()
         {
-            return string.Join(" - ",Teams.OrderByDescending(t => t.Rank).Select(tea => tea.ToString()).ToArray());
+            return string.Join(" - ", Teams.OrderByDescending(t => t.Rank).Select(tea => tea.ToString()).ToArray());
         }
 
         public int CompareTo(object obj)

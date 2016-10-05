@@ -39,11 +39,39 @@ namespace TasGenerator
 
             var groups = DrawHelper.Instance.GetDrawGroupsByRank();
 
-            var helper = new GroupDrawerHelper(competition.Draws[0].DrawRules);        
+            var helper = new GroupDrawerHelper(competition.Draws[0].DrawRules);
 
-        //   var  solutions = helper.ShiftAllTeamAndDrawSolutions(LineGroupDrawerHelper.CloneGroups(groups), groups[0].Teams.Count, 0);
-            var  solutions = helper.ShiftAllTeamAllGroupAndDrawSolutions(GroupDrawerHelper.CloneGroups(groups), groups.Count, groups[0].Teams.Count,0);
-            foreach(var sol in solutions)
+            //var testGroups = new List<DrawGroup>()
+            //{
+            //    new DrawGroup()
+            //    {
+            //        GroupIdentifier = "1",
+            //        Teams = new List<Team>() { new Team(1,"1",1,"1","A"),
+            //        new Team(2,"2",2,"2","A")
+            //                 ,new Team(3,"3",3,"3","A")
+            //        }
+            //    }
+            //    ,  new DrawGroup()
+            //    {
+            //        GroupIdentifier = "2",
+            //        Teams = new List<Team>() { new Team(4,"a",2,"a","B"),
+            //        new Team(5,"b",2,"b","B")
+            //               ,new Team(6,"c",2,"c","B")
+            //        }
+            //    }
+            //      ,new DrawGroup()
+            //    {
+            //        GroupIdentifier = "3",
+            //       Teams = new List<Team>() { new Team(7,"u",3,"u","C"),
+            //        new Team(8,"v",3,"v","C")
+            //         ,new Team(9,"w",3,"w","C")}
+            //    }
+
+            //};
+
+            //   var  solutions = helper.ShiftAllTeamAndDrawSolutions(LineGroupDrawerHelper.CloneGroups(groups), groups[0].Teams.Count, 0);
+            var solutions = helper.MakeDraw(GroupDrawerHelper.CloneGroups(groups));
+            foreach (var sol in solutions)
             {
                 sol.PrintSolution();
             }
@@ -70,7 +98,7 @@ namespace TasGenerator
             Console.WriteLine("==============================================");
 
             var barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions, "Barcelone", "PSG");
-       
+
             var pecentage = (float)barcPSG * 100 / solutions.Count;
             Console.WriteLine("==============================================");
             Console.WriteLine("====Percentage of Barca PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
@@ -78,7 +106,7 @@ namespace TasGenerator
 
             var PSVpsg = DrawSolution.NumberOfDrawItemInCommon(solutions, "Man City", "PSG");
 
-             pecentage = (float)PSVpsg * 100 / solutions.Count;
+            pecentage = (float)PSVpsg * 100 / solutions.Count;
             Console.WriteLine("==============================================");
             Console.WriteLine("====Percentage of Man City PSG (" + PSVpsg + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");

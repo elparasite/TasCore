@@ -32,7 +32,17 @@ namespace TasGenerator.Model
         public DrawSolution(DrawSolution currentSolution)
         {
             this.UniqueCode = currentSolution.UniqueCode;
-            this.DrawItems = new List<DrawItem>(currentSolution.DrawItems);
+            this.DrawItems = CloneItems(currentSolution.DrawItems);
+        }
+
+        static public List<DrawItem> CloneItems(List<DrawItem> drawItems)
+        {
+            var newGroups = new List<DrawItem>();
+            foreach (var group in drawItems)
+            {
+                newGroups.Add(new DrawItem(group));
+            }
+            return newGroups;
         }
 
         public bool AddItem(DrawItem match)

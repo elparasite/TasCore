@@ -23,66 +23,65 @@ namespace TasGenerator.Helper
             var nbTeamsByItem = nbGroups;
             var nbTeamsByGroups = groupsFull[0].Teams.Count;
 
-            for (int i = 0; i < nbTeamsByGroups; i++)
-            {
-                Team team = groupsFull[0].Teams[i];
+            List<DrawGroup> groupModified = null;
+            var currentSolution = new DrawSolution();
+            var firstTeam = TakeTeamInGroup(groupsFull, out groupModified, 0, 0);
+            var currentItem = new DrawItem();
+            currentItem.Teams.Add(firstTeam);
+            CompleteSolutions(groupModified, solutions, currentSolution, new DrawItem(currentItem), nbTeamsByItem, nbTeamsByGroups, 1);
 
-            }
-
-            var firstTeam = groupsFull[groupToSwift].Teams.First();
-            groupsFull[groupToSwift].Teams.RemoveAt(0);
-            groupsFull[groupToSwift].Teams.Add(firstTeam); 
+            return solutions;
         }
 
-        public void CompleteSolution(List<DrawGroup> groupsWithoutDrawItem, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int groupIndex, int nbItemBySolution = 0)
+        public void CompleteSolutions(List<DrawGroup> groupsWithoutDrawItem, List<DrawSolution> solutions, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int nbItemBySolution, int level)
         {
-            if (currentSolution == null)
-                currentSolution = new DrawSolution();
 
-            //int i = 0;
-            //while (currentItem.Teams.Count < nbTeamsByItem)
-            //{
-            //    var team = TakeTeamInGroup(groupsWithoutDrawItem, i);
-            //    i++;
-            //    currentItem.Teams.Add(team);
-            //}
 
-            if (currentSolution.DrawItems.Count < nbItemBySolution)
+            if (level == nbTeamsByItem * nbItemBySolution)
             {
-                var team = TakeTeamInGroup(groupsWithoutDrawItem, groupIndex);
-                CompleteDrawItem(groupsWithoutDrawItem, currentSolution, currentItem, nbTeamsByItem, groupIndex + 1);
+                // No more teams to choose
+                // Save solution
+                if (!solutions.Contains(currentSolution))
+                    solutions.Add(currentSolution);
+                //   currentSolution = new DrawSolution();
+                // bye
+                return;
             }
             else
-                currentSolution.AddItem(currentItem);
-        }
-
-
-        public void CompleteDrawItem(List<DrawGroup> groupsWithoutDrawItem, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int groupIndex, int teamIndex = 0)
-        {
-            if (currentItem == null)
-                currentItem = new DrawItem();
-
-            //int i = 0;
-            //while (currentItem.Teams.Count < nbTeamsByItem)
-            //{
-            //    var team = TakeTeamInGroup(groupsWithoutDrawItem, i);
-            //    i++;
-            //    currentItem.Teams.Add(team);
-            //}
-
-            if (currentItem.Teams.Count < nbTeamsByItem)
             {
-                var team = TakeTeamInGroup(groupsWithoutDrawItem, groupIndex);
-                CompleteDrawItem(groupsWithoutDrawItem, currentSolution,currentItem, nbTeamsByItem, groupIndex + 1);
+                // Group to select  = level % nbGroup = level % nbTeamsBYItems
+                var groupIndex = level % nbTeamsByItem;
+
+                int teamIndex = 0;
+                // For each solution in next subgroup
+                while (teamIndex < groupsWithoutDrawItem[groupIndex].Teams.Count)
+                {
+                    // Take team and remove it in group
+                    List<DrawGroup> goupModifed = null;
+                    var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, teamIndex);
+                    var item = new DrawItem(currentItem);
+                    item.Teams.Add(team);
+
+                    // Save current item
+                    var solution = new DrawSolution(currentSolution);
+
+                    if (groupIndex == nbTeamsByItem - 1)
+                    {
+                        solution.AddItem(item);
+                        item = new DrawItem();
+                    }
+                    // Next
+                    CompleteSolutions(CloneGroups(goupModifed), solutions, new DrawSolution(solution), new DrawItem(item), nbTeamsByItem, nbItemBySolution, level + 1);
+                    teamIndex++;
+                }
             }
-            else
-                currentSolution.AddItem(currentItem);
         }
 
-        public Team TakeTeamInGroup(List<DrawGroup> groupsWithoutDrawItem, int groupIndex)
+        public Team TakeTeamInGroup(List<DrawGroup> groupsWithoutDrawItem, out List<DrawGroup> groupModifed, int groupIndex, int teamIndex)
         {
-            var firstTeam = groupsWithoutDrawItem[groupIndex].Teams.First();
-            groupsWithoutDrawItem[groupIndex].Teams.RemoveAt(0);
+            groupModifed = CloneGroups(groupsWithoutDrawItem);
+            var firstTeam = groupsWithoutDrawItem[groupIndex].Teams[teamIndex];
+            groupModifed[groupIndex].Teams.RemoveAt(teamIndex);
             return firstTeam;
         }
 
