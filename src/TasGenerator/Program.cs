@@ -70,8 +70,8 @@ namespace TasGenerator
             //};
 
             //   var  solutions = helper.ShiftAllTeamAndDrawSolutions(LineGroupDrawerHelper.CloneGroups(groups), groups[0].Teams.Count, 0);
-            var solutions = helper.MakeDraw(GroupDrawerHelper.CloneGroups(groups));
-            foreach (var sol in solutions)
+            var solutions = helper.ParallelMakeDraw(GroupDrawerHelper.CloneGroups(groups));
+            foreach (var sol in solutions.Values)
             {
                 sol.PrintSolution();
             }
@@ -97,14 +97,14 @@ namespace TasGenerator
             Console.WriteLine("====Number of solution " + solutions.Count);
             Console.WriteLine("==============================================");
 
-            var barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions, "Barcelone", "PSG");
+            var barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.Values.ToList(), "Barcelone", "PSG");
 
             var pecentage = (float)barcPSG * 100 / solutions.Count;
             Console.WriteLine("==============================================");
             Console.WriteLine("====Percentage of Barca PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");
 
-            var PSVpsg = DrawSolution.NumberOfDrawItemInCommon(solutions, "Man City", "PSG");
+            var PSVpsg = DrawSolution.NumberOfDrawItemInCommon(solutions.Values.ToList(), "Man City", "PSG");
 
             pecentage = (float)PSVpsg * 100 / solutions.Count;
             Console.WriteLine("==============================================");

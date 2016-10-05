@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "buildOptions": {
     "emitEntryPoint": true
@@ -10,6 +10,7 @@
       "version": "1.0.1"
     },
     "mongocsharpdriver": "2.3.0-rc1",
+    "System.Collections.Concurrent": "4.0.12",
     "TasGenerator.Model": "1.0.0-*"
   },
 
