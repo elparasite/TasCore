@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using TasGenerator.Model;
 
@@ -10,6 +11,7 @@ namespace TasGenerator.Helper
     public class GroupDrawerHelper
     {
         public List<Checkable<Team>> DrawRules { get; set; }
+        public int nonUniqueTries = 0;
 
         public GroupDrawerHelper(List<Checkable<Team>> drawRules)
         {
@@ -34,7 +36,7 @@ namespace TasGenerator.Helper
             return solutions;
         }
 
-        public ConcurrentDictionary<int,DrawSolution> ParallelMakeDraw(List<DrawGroup> groupsFull)
+        public ConcurrentDictionary<int, DrawSolution> ParallelMakeDraw(List<DrawGroup> groupsFull)
         {
             var solutions = new ConcurrentDictionary<int, DrawSolution>();
             var nbGroups = groupsFull.Count;
@@ -55,29 +57,20 @@ namespace TasGenerator.Helper
         public void CompleteSolutions(List<DrawGroup> groupsWithoutDrawItem, List<DrawSolution> solutions, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int nbItemBySolution, int level)
         {
 
+            // Group to select  = level % nbGroup = level % nbTeamsBYItems
+            var groupIndex = level % nbTeamsByItem;
+            int teamIndex = 0;
 
-            if (level == nbTeamsByItem * nbItemBySolution)
+            Action<int> process = (int tIndex) =>
             {
-                // No more teams to choose
-                // Save solution
-                if (!solutions.Contains(currentSolution))
-                    solutions.Add(currentSolution);
-                //   currentSolution = new DrawSolution();
-                // bye
-                return;
-            }
-            else
-            {
-                // Group to select  = level % nbGroup = level % nbTeamsBYItems
-                var groupIndex = level % nbTeamsByItem;
+                // Take team and remove it in group, we make this in another group in order to make 
+                List<DrawGroup> goupModifed = null;
+                var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, teamIndex);
 
-                int teamIndex = 0;
-                // For each solution in next subgroup
-                while (teamIndex < groupsWithoutDrawItem[groupIndex].Teams.Count)
+                var canAddTeamToItem = DrawRules.All(rule => rule.Check(currentItem.Teams, team));
+                if (canAddTeamToItem)
                 {
-                    // Take team and remove it in group
-                    List<DrawGroup> goupModifed = null;
-                    var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, teamIndex);
+                    // Clone item
                     var item = new DrawItem(currentItem);
                     item.Teams.Add(team);
 
@@ -89,9 +82,39 @@ namespace TasGenerator.Helper
                         solution.AddItem(item);
                         item = new DrawItem();
                     }
+
                     // Next
                     CompleteSolutions(CloneGroups(goupModifed), solutions, new DrawSolution(solution), new DrawItem(item), nbTeamsByItem, nbItemBySolution, level + 1);
-                    teamIndex++;
+                }
+            };
+
+
+            // No more teams, we have a solution
+            if (level == nbTeamsByItem * nbItemBySolution)
+            {
+                // Store solution
+                if (!solutions.Contains(currentSolution))
+                    solutions.Add(currentSolution);
+                else Interlocked.Increment(ref nonUniqueTries);
+
+                // bye
+                return;
+            }
+            else
+            {
+                // do not perform on last group
+                if (groupIndex == nbTeamsByItem - 2)
+                {
+                    process(teamIndex);
+                }
+                else
+                {
+                    // For each solution in next subgroup
+                    while (teamIndex < groupsWithoutDrawItem[groupIndex].Teams.Count)
+                    {
+                        process(teamIndex);
+                        teamIndex++;
+                    }
                 }
             }
         }

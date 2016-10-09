@@ -29,6 +29,11 @@ namespace TasGenerator.Model
             Teams = new List<Team>(item.Teams);
         }
 
+        public DrawItem AddTeam(Team team)
+        {
+            Teams.Add(team);
+            return this;
+        }
 
         public override bool Equals(object obj)
         {
