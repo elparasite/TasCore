@@ -1,18 +1,13 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TasGenerator.Model
 {
     public class DrawSolution
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        public int Id { get; set; }
         public int NumberItems { get; set; }
         public List<DrawItem> DrawItems { get; set; } = new List<DrawItem>();
 

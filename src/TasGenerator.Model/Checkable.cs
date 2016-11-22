@@ -18,16 +18,5 @@ namespace TasGenerator.Model
 
             }
         }
-        //public bool Check(IEnumerable<T> groupsOfTeams)
-        //{
-        //        if (groupsOfTeams == null)
-        //            return false;
-        //    var ok = true;
-        //    foreach(var team in groupsOfTeams)
-        //    {
-        //        ok &= Check(groupsOfTeams.Except(team), team));
-        //    }
-        //    return ok;
-        //}
     }
 }

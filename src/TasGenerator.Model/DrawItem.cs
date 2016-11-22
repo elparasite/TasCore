@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TasGenerator.Model
 {
     public class DrawItem : IComparable
     {
+        public int Id { get; set; }
         public List<Team> Teams { get; set; } = new List<Team>();
         public int NumberTeamsByItems { get; set; }
 
-        //public bool IsValid
-        //{
-        //    get
-        //    {
-        //        return FirstRank.Country != SecondRank.Country
-        //            && FirstRank.Group != SecondRank.Group
-        //            && FirstRank.Rank != SecondRank.Rank;
-        //    }
 
         public DrawItem()
         {

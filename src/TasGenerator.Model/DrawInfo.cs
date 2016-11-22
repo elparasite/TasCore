@@ -5,6 +5,7 @@ namespace TasGenerator.Model
 {
     public class DrawInfo
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Rules { get; set; }
         public int NumberOfTeamsByDrawSolution { get; set; } = 2;
@@ -21,6 +22,7 @@ namespace TasGenerator.Model
             NotPossible
 
         }
+
         public List<SpecialExclusion> SpecialExclusions { get; set; } = new List<SpecialExclusion>();
 
         public List<Team> Teams { get; set; }
@@ -65,19 +67,7 @@ namespace TasGenerator.Model
             return GetTeamsAvailable().Where(kp => kp.Key.Rank == 1).ToDictionary(g => g.Key, g => g.Value);
         }
 
-        //public  Dictionary<Team, int> ComputePercentageSecond(string secondRankTeam)
-        //{
-        //    var listOfPercent = new Dictionary<Team, int>(GetFirstTeamsAvailable().ToDictionary(kp => kp.Key, kp => 0));
-        //    foreach (var sol in DrawDetail.MatchSolution)
-        //    {
-        //        foreach (var match in sol.Matches)
-        //        {
-        //            if (match.SecondRank.Name == secondRankTeam)
-        //                listOfPercent[match.FirstRank]++;
-        //        }
-        //    }
-        //    return listOfPercent;
-        //}
+   
         internal Dictionary<Team, int> ComputePercentage(string teamName)
         {
             var listOfPercent = new Dictionary<Team, int>(Teams.Where(t => t.Name != teamName).ToDictionary(kp => kp, kp => 0));
@@ -93,55 +83,7 @@ namespace TasGenerator.Model
             return listOfPercent;
         }
 
-        //public void PrintPercetageSecond( string teamName)
-        //{
-        //    Console.WriteLine("==============================================");
-        //    Console.WriteLine("====Percentage of  " + teamName + " ");
-        //    Console.WriteLine("==============================================");
-        //    var allPsgs = ComputePercentageSecond( teamName);
-        //    var allPsgsSorted = allPsgs.OrderBy(f => f.Value);
-        //    foreach (var teamNumber in allPsgsSorted)
-        //    {
-        //        Console.WriteLine(string.Format("VS {0} : {1} %", teamNumber.Key.ToString(), (float)teamNumber.Value * 100 / DrawDetail.MatchSolution.Count));
-        //    }
-        //}
-
-        //public void PrintPercetageFirst( string teamName)
-        //{
-        //    Console.WriteLine("==============================================");
-        //    Console.WriteLine("====Percentage of  " + teamName + " ");
-        //    Console.WriteLine("==============================================");
-        //    var allPsgs = ComputePercentageFirst( teamName);
-        //    var allPsgsSorted = allPsgs.OrderBy(f => f.Value);
-        //    foreach (var teamNumber in allPsgsSorted)
-        //    {
-        //        Console.WriteLine(string.Format("VS {0} : {1} %", teamNumber.Key.ToString(), (float)teamNumber.Value * 100 / DrawDetail.MatchSolution.Count));
-        //    }
-        //}
-
-
-        //private void PerfomDraw()
-        //{
-        //    var teamsFirst = GetFirstTeamsAvailable();
-        //    var allSolutions = new ConcurrentBag<DrawSolution>();
-        //    var nextFirst = teamsFirst.Keys.FirstOrDefault();
-        //    Parallel.ForEach(teamsFirst[nextFirst],
-        //         (teamSecond) =>
-        //         {
-        //             //    foreach (var teamSecond in teamsFirst[nextFirst])
-        //             //{
-        //             var soluiton = new DrawSolution(NumberOfTeamsByDrawSolution);
-        //             AssociateAndContinue(teamsFirst, nextFirst, teamSecond, ref soluiton, allSolutions);
-        //             // 
-        //             //if (!allSolutions.Contains(soluiton))
-        //             //    allSolutions.Add(soluiton);
-        //             Console.WriteLine("==============================================");
-        //             Console.WriteLine(allSolutions.Count);
-        //             Console.WriteLine("==============================================");
-        //             //}
-        //         });
-        //}
-
+   
         public bool RemoveAndCheck(Dictionary<Team, List<Team>> team, Team current, Team opponentInAnotherMatch)
         {
             if (team[current].Contains(opponentInAnotherMatch))
