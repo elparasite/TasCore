@@ -48,7 +48,7 @@ namespace TasGenerator.Helper
 
     public  class WarRule : Checkable<Team>
     {
-        public List<string> Belligerants = new List<string>();
+        public List<Country> Belligerants = new List<Country>();
 
         public override bool Check(Team first, Team second)
         {

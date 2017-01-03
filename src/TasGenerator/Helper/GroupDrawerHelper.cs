@@ -65,7 +65,7 @@ namespace TasGenerator.Helper
             {
                 // Take team and remove it in group, we make this in another group in order to make 
                 List<DrawGroup> goupModifed = null;
-                var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, teamIndex);
+                var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, tIndex);
 
                 var canAddTeamToItem = DrawRules.All(rule => rule.Check(currentItem.Teams, team));
                 if (canAddTeamToItem)
@@ -94,7 +94,11 @@ namespace TasGenerator.Helper
             {
                 // Store solution
                 if (!solutions.Contains(currentSolution))
+                {
                     solutions.Add(currentSolution);
+                    if (solutions.Count % 1000 == 0)
+                        Console.WriteLine(solutions.Count);
+                }
                 else Interlocked.Increment(ref nonUniqueTries);
 
                 // bye
@@ -121,44 +125,71 @@ namespace TasGenerator.Helper
 
         public void ParallelCompleteSolutions(List<DrawGroup> groupsWithoutDrawItem, ConcurrentDictionary<int, DrawSolution> solutions, DrawSolution currentSolution, DrawItem currentItem, int nbTeamsByItem, int nbItemBySolution, int level)
         {
+
+            // Group to select  = level % nbGroup = level % nbTeamsBYItems
+            var groupIndex = level % nbTeamsByItem;
+            int teamIndex = 0;
+
+            Action<int> process = (int tIndex) =>
+            {
+                // Take team and remove it in group, we make this in another group in order to make 
+                List<DrawGroup> goupModifed = null;
+                var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, tIndex);
+
+                var canAddTeamToItem = DrawRules.All(rule => rule.Check(currentItem.Teams, team));
+                if (canAddTeamToItem)
+                {
+                    // Clone item
+                    var item = new DrawItem(currentItem);
+                    item.Teams.Add(team);
+
+                    // Save current item
+                    var solution = new DrawSolution(currentSolution);
+
+                    if (groupIndex == nbTeamsByItem - 1)
+                    {
+                        solution.AddItem(item);
+                        item = new DrawItem();
+                    }
+
+                    // Next
+                    ParallelCompleteSolutions(CloneGroups(goupModifed), solutions, new DrawSolution(solution), new DrawItem(item), nbTeamsByItem, nbItemBySolution, level + 1);
+                }
+            };
+
+            // No more teams, we have a solution
             if (level == nbTeamsByItem * nbItemBySolution)
             {
                 // No more teams to choose
                 // Save solution
                 if (!solutions.ContainsKey(currentSolution.GetHashCode()))
+                {
                     solutions.TryAdd(currentSolution.GetHashCode(), currentSolution);
+                    if (solutions.Count % 1000 == 0)
+                        Console.WriteLine(solutions.Count);
+                }
+                else Interlocked.Increment(ref nonUniqueTries);
                 //   currentSolution = new DrawSolution();
                 // bye
                 return;
             }
             else
             {
-                // Group to select  = level % nbGroup = level % nbTeamsBYItems
-                var groupIndex = level % nbTeamsByItem;
-
-                // For each solution in next subgroup
-                Parallel.For(0, groupsWithoutDrawItem[groupIndex].Teams.Count,
-                    (index) =>
-                    {
-                        // Take team and remove it in group
-                        List<DrawGroup> goupModifed = null;
-                        var team = TakeTeamInGroup(groupsWithoutDrawItem, out goupModifed, groupIndex, index);
-                        var item = new DrawItem(currentItem);
-                        item.Teams.Add(team);
-
-                        // Save current item
-                        var solution = new DrawSolution(currentSolution);
-
-                        if (groupIndex == nbTeamsByItem - 1)
+                // do not perform on last group
+                if (groupIndex == nbTeamsByItem - 2)
+                {
+                    process(teamIndex);
+                }
+                else
+                {
+                    // For each solution in next subgroup
+                    Parallel.For(teamIndex, groupsWithoutDrawItem[groupIndex].Teams.Count,
+                        (index) =>
                         {
-                            solution.AddItem(item);
-                            item = new DrawItem();
+                            process(index);
                         }
-                        // Next
-                        ParallelCompleteSolutions(CloneGroups(goupModifed), solutions, new DrawSolution(solution), new DrawItem(item), nbTeamsByItem, nbItemBySolution, level + 1);
-
-                    }
-                    );
+                        );
+                }
             }
         }
 

@@ -7,7 +7,7 @@ namespace TasGenerator.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public int Rank { get; set; }
-        public string Country { get; set; }
+        public Country Country { get; set; }
         public Group Group { get; set; }
         public bool IsDone { get; set; }
 
@@ -17,7 +17,7 @@ namespace TasGenerator.Model
 
         }
 
-        public Team(int id, string name, int rank, string country, Group group)
+        public Team(int id, string name, int rank, Country country, Group group)
         {
             this.Name = name;
             this.Rank = rank;

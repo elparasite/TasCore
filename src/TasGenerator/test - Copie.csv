@@ -1,0 +1,65 @@
+Id,Name,Rank,Code,Name,Id,Name,IsDone,Probability
+0,Arsenal,1,ENG,England,0,A,False,0
+0,Arsenal,1,ENG,England,0,A,False,"12,9106"
+0,Arsenal,1,ENG,England,0,A,False,0
+0,Arsenal,1,ENG,England,0,A,False,"16,76664"
+0,Arsenal,1,ENG,England,0,A,False,"15,59554"
+0,Arsenal,1,ENG,England,0,A,False,"21,73665"
+0,Arsenal,1,ENG,England,0,A,False,"13,11054"
+0,Arsenal,1,ENG,England,0,A,False,"19,88003"
+0,Naples,1,ITA,Italy,0,B,False,"12,51071"
+0,Naples,1,ITA,Italy,0,B,False,0
+0,Naples,1,ITA,Italy,0,B,False,"15,62411"
+0,Naples,1,ITA,Italy,0,B,False,"13,73893"
+0,Naples,1,ITA,Italy,0,B,False,"13,05341"
+0,Naples,1,ITA,Italy,0,B,False,"17,62354"
+0,Naples,1,ITA,Italy,0,B,False,"11,02542"
+0,Naples,1,ITA,Italy,0,B,False,"16,42388"
+0,Barcelone,1,SPA,Spain,0,C,False,"20,62268"
+0,Barcelone,1,SPA,Spain,0,C,False,"17,48072"
+0,Barcelone,1,SPA,Spain,0,C,False,0
+0,Barcelone,1,SPA,Spain,0,C,False,"22,47929"
+0,Barcelone,1,SPA,Spain,0,C,False,"21,65096"
+0,Barcelone,1,SPA,Spain,0,C,False,0
+0,Barcelone,1,SPA,Spain,0,C,False,"17,76635"
+0,Barcelone,1,SPA,Spain,0,C,False,0
+0,Atletico Madrid,1,SPA,Spain,0,D,False,"20,07998"
+0,Atletico Madrid,1,SPA,Spain,0,D,False,"16,88089"
+0,Atletico Madrid,1,SPA,Spain,0,D,False,"25,36418"
+0,Atletico Madrid,1,SPA,Spain,0,D,False,0
+0,Atletico Madrid,1,SPA,Spain,0,D,False,"20,39417"
+0,Atletico Madrid,1,SPA,Spain,0,D,False,0
+0,Atletico Madrid,1,SPA,Spain,0,D,False,"17,28078"
+0,Atletico Madrid,1,SPA,Spain,0,D,False,0
+0,Monaco,1,FRA,France,0,F,False,0
+0,Monaco,1,FRA,France,0,F,False,"12,53927"
+0,Monaco,1,FRA,France,0,F,False,"18,22336"
+0,Monaco,1,FRA,France,0,F,False,"15,99543"
+0,Monaco,1,FRA,France,0,F,False,0
+0,Monaco,1,FRA,France,0,F,False,"20,90831"
+0,Monaco,1,FRA,France,0,F,False,"12,76778"
+0,Monaco,1,FRA,France,0,F,False,"19,56584"
+0,Dortmund,1,GER,Germany,0,E,False,"18,76607"
+0,Dortmund,1,GER,Germany,0,E,False,"15,99543"
+0,Dortmund,1,GER,Germany,0,E,False,"24,25021"
+0,Dortmund,1,GER,Germany,0,E,False,0
+0,Dortmund,1,GER,Germany,0,E,False,0
+0,Dortmund,1,GER,Germany,0,E,False,0
+0,Dortmund,1,GER,Germany,0,E,False,"16,36675"
+0,Dortmund,1,GER,Germany,0,E,False,"24,62154"
+0,Leicester,1,ENG,England,0,G,False,"14,68152"
+0,Leicester,1,ENG,England,0,G,False,"12,71065"
+0,Leicester,1,ENG,England,0,G,False,0
+0,Leicester,1,ENG,England,0,G,False,"16,481"
+0,Leicester,1,ENG,England,0,G,False,"15,3956"
+0,Leicester,1,ENG,England,0,G,False,"21,22251"
+0,Leicester,1,ENG,England,0,G,False,0
+0,Leicester,1,ENG,England,0,G,False,"19,50871"
+0,Juventus,1,ITA,Italy,0,H,False,"13,33905"
+0,Juventus,1,ITA,Italy,0,H,False,"11,48243"
+0,Juventus,1,ITA,Italy,0,H,False,"16,53813"
+0,Juventus,1,ITA,Italy,0,H,False,"14,5387"
+0,Juventus,1,ITA,Italy,0,H,False,"13,91031"
+0,Juventus,1,ITA,Italy,0,H,False,"18,509"
+0,Juventus,1,ITA,Italy,0,H,False,"11,68238"
+0,Juventus,1,ITA,Italy,0,H,False,0
