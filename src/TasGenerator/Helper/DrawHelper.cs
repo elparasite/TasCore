@@ -54,43 +54,94 @@ namespace TasGenerator
         }
 
         private List<Team> teams = new List<Team>();
-      
+
+        //public List<Team> GetAllTeams()
+        //{
+        //    if (teams.Count == 0)
+        //    {
+        //        teams.Add(
+        //            new Team(1, "Real", 1, "Spain", ParseGroup("A")));
+        //        teams.Add(
+        //           new Team(2, "PSG", 2, "France", ParseGroup("A")));
+        //        teams.Add(
+        //           new Team(3, "Wolfsburg", 1, "Germany", ParseGroup("B")));
+        //        teams.Add(
+        //           new Team(4, "PSV", 2, "Netherlands", ParseGroup("B")));
+        //        teams.Add(
+        //           new Team(5, "Atletico", 1, "Spain", ParseGroup("C")));
+        //        teams.Add(
+        //           new Team(6, "Benfica", 2, "Portugal", ParseGroup("C")));
+        //        teams.Add(
+        //           new Team(7, "Man City", 1, "England", ParseGroup("D")));
+        //        teams.Add(
+        //           new Team(8, "Juventus", 2, "Italy", ParseGroup("D")));
+        //        teams.Add(
+        //           new Team(9, "Barcelone", 1, "Spain", ParseGroup("E")));
+        //        teams.Add(
+        //           new Team(10, "Roma", 2, "Italy", ParseGroup("E")));
+        //        teams.Add(
+        //           new Team(11, "Bayern", 1, "Germany", ParseGroup("F")));
+        //        teams.Add(
+        //           new Team(12, "Arsenal", 2, "England", ParseGroup("F")));
+        //        teams.Add(
+        //           new Team(13, "Chelsea", 1, "England", ParseGroup("G")));
+        //        teams.Add(
+        //           new Team(14, "Dynamo kiev", 2, "Ukraine", ParseGroup("G")));
+        //        teams.Add(
+        //           new Team(15, "Zenith", 1, "Russia", ParseGroup("H")));
+        //        teams.Add(
+        //           new Team(16, "Gent", 2, "Belgium", ParseGroup("H")));
+        //    }
+        //    return teams;
+        //}
+
         public List<Team> GetAllTeams()
         {
             if (teams.Count == 0)
             {
                 teams.Add(
-                    new Team(1, "Real", 1, "Spain", ParseGroup("A")));
+                    new Team(1, "Man Utd", 1, "England", ParseGroup("A")));
                 teams.Add(
-                   new Team(2, "PSG", 2, "France", ParseGroup("A")));
+                   new Team(2, "FC Bale", 2, "Switzerland", ParseGroup("A")));
+                //teams.Add(
+                //   new Team(3,"CSKA Moskva", 2, "Russia",ParseGroup( "A"));
                 teams.Add(
-                   new Team(3, "Wolfsburg", 1, "Germany", ParseGroup("B")));
+                   new Team(4, "PSG", 1, "France", ParseGroup("B")));
                 teams.Add(
-                   new Team(4, "PSV", 2, "Netherlands", ParseGroup("B")));
+                   new Team(5, "Bayern", 2, "Germany", ParseGroup("B")));
                 teams.Add(
-                   new Team(5, "Atletico", 1, "Spain", ParseGroup("C")));
+                   new Team(6, "Chelsea FC", 1, "England", ParseGroup("C")));
                 teams.Add(
-                   new Team(6, "Benfica", 2, "Portugal", ParseGroup("C")));
+                   new Team(7, "As Roma", 2, "Italy", ParseGroup("C")));
+                //teams.Add(
+                //    new Team(8,"Atletico de Madrid", 2, "Spain", "C")));
                 teams.Add(
-                   new Team(7, "Man City", 1, "England", ParseGroup("D")));
+                   new Team(9, "FC Barcelona", 1, "Spain", ParseGroup("D")));
                 teams.Add(
-                   new Team(8, "Juventus", 2, "Italy", ParseGroup("D")));
+                   new Team(10, "Juventus", 2, "Italy", ParseGroup("D")));
+                //             teams.Add(
+                //new Team(11,"Sporting Portugal", 2, "Portugal",ParseGroup( "D")));
+
                 teams.Add(
-                   new Team(9, "Barcelone", 1, "Spain", ParseGroup("E")));
+                   new Team(12, "Liverpool FC", 1, "England", ParseGroup("E")));
                 teams.Add(
-                   new Team(10, "Roma", 2, "Italy", ParseGroup("E")));
+                   new Team(13, "Sevilla FC", 2, "Spain", ParseGroup("E")));
+                //teams.Add(
+                //new Team(14,"FC Spartak Moskva", 2, "Russia", ParseGroup("E")));
                 teams.Add(
-                   new Team(11, "Bayern", 1, "Germany", ParseGroup("F")));
+                   new Team(15, "Man City", 1, "England", ParseGroup("F")));
                 teams.Add(
-                   new Team(12, "Arsenal", 2, "England", ParseGroup("F")));
+                   new Team(16, "Shaktar Donetsk", 2, "Ukraine", ParseGroup("F")));
                 teams.Add(
-                   new Team(13, "Chelsea", 1, "England", ParseGroup("G")));
+                   new Team(17, "Besiktas", 1, "Turkey", ParseGroup("G")));
                 teams.Add(
-                   new Team(14, "Dynamo kiev", 2, "Ukraine", ParseGroup("G")));
+                   new Team(18, "FC Porto", 2, "Portugal", ParseGroup("G")));
+                //  teams.Add(
+                //new Team(19,"Leipzig", 2, "Germany",ParseGroup( "G")));
                 teams.Add(
-                   new Team(15, "Zenith", 1, "Russia", ParseGroup("H")));
+                   new Team(20, "Tottenham", 1, "England", ParseGroup("H")));
                 teams.Add(
-                   new Team(16, "Gent", 2, "Belgium", ParseGroup("H")));
+                   new Team(21, "Real Madrid", 2, "Spain", ParseGroup("H")));
             }
             return teams;
         }

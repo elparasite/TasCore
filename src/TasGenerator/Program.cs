@@ -88,7 +88,7 @@ namespace TasGenerator
             Console.WriteLine("====Number of solution " + solutions.Count);
             Console.WriteLine("==============================================");
 
-            var barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Barcelone", "PSG");
+            var barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Real Madrid", "PSG");
 
             var pecentage = (float)barcPSG * 100 / solutions.Count;
             Console.WriteLine("==============================================");
@@ -102,25 +102,25 @@ namespace TasGenerator
             Console.WriteLine("====Percentage of Man City PSG (" + PSVpsg + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");
 
-            var barca = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Barcelone");
-            var arsenal = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Arsenal");
+            //var barca = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Real Madrid");
+            //var arsenal = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Arsenal");
 
-            var matchDrawed = new List<DrawItem>();
-            matchDrawed.Add(new DrawItem()
-                .AddTeam(barca)
-                .AddTeam(arsenal));
+            //var matchDrawed = new List<DrawItem>();
+            //matchDrawed.Add(new DrawItem()
+            //    .AddTeam(barca)
+            //    .AddTeam(arsenal));
 
-            solutions = solutions.Where(s => matchDrawed.All(drawedItem => s.DrawItems.Contains(drawedItem))).ToList();
+            //solutions = solutions.Where(s => matchDrawed.All(drawedItem => s.DrawItems.Contains(drawedItem))).ToList();
 
-            Console.WriteLine("==============================================");
-            Console.WriteLine("====Number of solution " + solutions.Count);
-            Console.WriteLine("==============================================");
+            //Console.WriteLine("==============================================");
+            //Console.WriteLine("====Number of solution " + solutions.Count);
+            //Console.WriteLine("==============================================");
 
-             barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Barcelone", "PSG");
+             barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Real Madrid", "PSG");
 
              pecentage = (float)barcPSG * 100 / solutions.Count;
             Console.WriteLine("==============================================");
-            Console.WriteLine("====Percentage of Barca PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
+            Console.WriteLine("====Percentage of Real Madrid PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");
 
              PSVpsg = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Man City", "PSG");
@@ -130,25 +130,25 @@ namespace TasGenerator
             Console.WriteLine("====Percentage of Man City PSG (" + PSVpsg + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");
 
-            var bayern = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Bayern");
-            var kiev = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Dynamo kiev");
+            //var bayern = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Bayern");
+            //var kiev = DrawHelper.Instance.GetAllTeams().Single(t => t.Name == "Dynamo kiev");
             
-            matchDrawed.Add(new DrawItem()
-                .AddTeam(bayern)
-                .AddTeam(kiev));
+            //matchDrawed.Add(new DrawItem()
+            //    .AddTeam(bayern)
+            //    .AddTeam(kiev));
 
-            solutions = solutions.Where(s => matchDrawed.All(drawedItem => s.DrawItems.Contains(drawedItem))).ToList();
+            //solutions = solutions.Where(s => matchDrawed.All(drawedItem => s.DrawItems.Contains(drawedItem))).ToList();
 
 
             Console.WriteLine("==============================================");
             Console.WriteLine("====Number of solution " + solutions.Count);
             Console.WriteLine("==============================================");
 
-             barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Barcelone", "PSG");
+             barcPSG = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Real Madrid", "PSG");
 
              pecentage = (float)barcPSG * 100 / solutions.Count;
             Console.WriteLine("==============================================");
-            Console.WriteLine("====Percentage of Barca PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
+            Console.WriteLine("====Percentage of Real Madrid PSG (" + barcPSG + " over " + solutions.Count + ") " + pecentage + "%");
             Console.WriteLine("==============================================");
 
              PSVpsg = DrawSolution.NumberOfDrawItemInCommon(solutions.ToList(), "Man City", "PSG");
